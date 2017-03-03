@@ -49,7 +49,8 @@ class Movie < ApplicationRecord
 	 	sorted = scores.sort! {|a,b| a["score"] <=> b["score"]}.reverse!
 	 	byebug
 	 	top_ten = sorted[1..10]
-	 	top_ten.each {|m| puts m["name"]}
+	 	return top_ten
+	 	# top_ten.each {|m| puts m["name"]}
 	end
 
 	def sci_fi_bonus
@@ -68,7 +69,12 @@ class Movie < ApplicationRecord
     def get_score
 		this_score = 2.3 * self.imdb_score
 		# ruby is rounding here
-		that_score = self.year / 2000
+		# had to add this if/else because some data is missing years
+		if self.year == nil
+			that_score = 0
+		else
+			that_score = self.year / 2000
+		end
 		the_score = this_score - that_score
 		return the_score + self.sci_fi_bonus
 	end

@@ -1,6 +1,41 @@
-<h1>Hi! Click da button</h1>
+<h1>Fractal Movie Picker</h1>
 
-<%= link_to "CLICK ME!!!", controller: "greetings", action: "show" %>
+<h2>Hello <%=@user[:name]%>!!</h2>
+<h3>Welcome to the fractal movie rater and picker!</h3>
+<p>Right now your profile says the following:</p>
+<ul>
+<li>User likes old movies?(released before 1970): <%=@user[:likes_old_movies]%></li>
+<li>User's favorite genres are : <%=@user[:favorite_genres]%></li>
+</ul>
 
-<p>I will eventually have this customizeable but for now you are this user jess = {id: 12, likes_old_movies: true, favorite_genres: "Action|Sci-Fi"}</p>
-<!-- # => <a href="/profiles">Profiles</a> -->
+<p>If you wish to see Henry's top ten Fractal choosen movies then click here!</p>
+<%= link_to "Show Top Ten Movies", greetings_show_path, method: :put, class:"btn btn-success" %>
+
+
+<p>Otherwise tell us a little bit about yourself, and we'll show you your custom top ten</p>
+
+<%= form_tag('/greetings/show', method: :put) do %>
+	<%= label_tag 'user[name]', 'Name:' %>
+    <%= text_field_tag 'user[name]', @user[:name] %><br>
+	<div class="btn-group" data-toggle="buttons">
+	  <label class="btn btn-primary">
+	    <input value='user[genre]' type="checkbox" checked autocomplete="off"> Sci-Fi
+	  </label>
+	  <label class="btn btn-primary">
+	    <input type="checkbox" autocomplete="off"> Thriller
+	  </label>
+	  <label class="btn btn-primary">
+	    <input type="checkbox" autocomplete="off"> Drama
+	  </label>
+	</div>
+  <%= submit_tag 'submit', class:"btn btn-success"%>
+<% end %>
+
+
+<select name="city_id" id="city_id">
+  <option value="1">Lisbon</option>
+  <option value="2">Madrid</option>
+  ...
+  <option value="12">Berlin</option>
+</select>
+
