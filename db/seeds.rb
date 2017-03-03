@@ -12,7 +12,7 @@ require 'csv'
 
 # seeding my rails database with the info from the .csv file
 # should check for duplicates and missing data here before it reaches the db
-
+# changed from ../movie_finder/movie_metadata_rails.csv
 all_movies = CSV.read('./movie_metadata_rails.csv')
 all_movies.shift
 all_movies.each do |movie|
