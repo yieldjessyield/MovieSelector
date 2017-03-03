@@ -7,7 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 require 'csv'
-require 'byebug'
 
 # /Users/jessharrelson/Development/fractalTechExerciseRefactor/movie_finder/movie_metadata_rails.csv
 
