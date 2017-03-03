@@ -12,30 +12,30 @@
 <%= link_to "Show Top Ten Movies", greetings_show_path, method: :put, class:"btn btn-success" %>
 
 
-<p>Otherwise tell us a little bit about yourself, and we'll show you your custom top ten</p>
+<h4>Otherwise tell us a little bit about yourself, and we'll show you your custom top ten</h4>
 
 <%= form_tag('/greetings/show', method: :put) do %>
 	<%= label_tag 'user[name]', 'Name:' %>
     <%= text_field_tag 'user[name]', @user[:name] %><br>
-	<div class="btn-group" data-toggle="buttons">
-	  <label class="btn btn-primary">
-	    <input value='user[genre]' type="checkbox" checked autocomplete="off"> Sci-Fi
-	  </label>
-	  <label class="btn btn-primary">
-	    <input type="checkbox" autocomplete="off"> Thriller
-	  </label>
-	  <label class="btn btn-primary">
-	    <input type="checkbox" autocomplete="off"> Drama
-	  </label>
-	</div>
-  <%= submit_tag 'submit', class:"btn btn-success"%>
-<% end %>
 
+<p>Like Old Movies(released before 1970)?</p>
+<div class="btn-group" data-toggle="buttons">
+  <label class="btn btn-primary">
+    <input type="radio" name="user[likes_old_movies]" value="true" id="true" checked> Yes!
+  </label>
+  <label class="btn btn-primary">
+    <input type="radio" name="user[likes_old_movies]" value="false" id="false" > Nope!
+  </label>
+</div>
 
-<select name="city_id" id="city_id">
-  <option value="1">Lisbon</option>
-  <option value="2">Madrid</option>
-  ...
-  <option value="12">Berlin</option>
-</select>
+<p>Favorite genres:</p>
+<div class="btn-group" data-toggle="buttons">
+	<%@genres.each do |genre|%>
+		<label class="btn btn-primary">
+			<input type="checkbox" name="user[genres][]" id="<%=genre%>" value="<%=genre%>"><%=genre%></input>
+		</label>
+	 <%end%>
+ </div><br/>
+ <%= submit_tag 'submit', class:"btn btn-success"%>
+ <% end %>
 
