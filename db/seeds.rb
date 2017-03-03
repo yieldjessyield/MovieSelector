@@ -13,7 +13,7 @@ require 'csv'
 # seeding my rails database with the info from the .csv file
 # should check for duplicates and missing data here before it reaches the db
 
-all_movies = CSV.read('../movie_finder/movie_metadata_rails.csv')
+all_movies = CSV.read('./movie_metadata_rails.csv')
 all_movies.shift
 all_movies.each do |movie|
 	Movie.create(title: movie[11].strip, genres: movie[9], year: movie[23], link: movie[17], imdb_score: movie[25])
