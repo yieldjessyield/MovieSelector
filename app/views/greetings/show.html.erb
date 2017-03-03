@@ -1,3 +1,13 @@
-<h1>you made it jerk!</h1>
+<h1>Here you go <%= @user[:name] %></h1>
 
-<p>Eventually I will show all the movie titles that you asked for here!</p>
+<p>These are your top ten suggested Fractal movie choices! Enjoy!</p>
+<%= link_to "Try Again", greetings_hello_path, class:"btn btn-secondary" %>
+
+<ol>
+	<% @top_ten.each do |movie| %>
+		<li>
+			<h2><a href=<%=movie["link"]%> target="_blank"> <%= movie["name"] %></a></h2>
+			<p>Rating: <%= movie["score"] %></p>
+		</li>
+	<% end %>
+</ol>
