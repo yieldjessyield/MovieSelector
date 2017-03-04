@@ -1,42 +1,44 @@
-<h1>Fractal Movie Picker</h1>
+<div class="container">
+		<h1>Fractal Movie Picker</h1>
 
-<h3>Welcome to the fractal movie rater and picker!</h3>
-<p>Right now your profile says the following:</p>
+		<h3>Welcome to the fractal movie rater and picker!</h3>
+		<p>Right now your profile says the following:</p>
 
-<ul>
-	<li>User's name: <%=@user[:name]%></li>
-	<li>User likes old movies?(released before 1970): <%=@user[:likes_old_movies]%></li>
-	<li>User's favorite genres are : <%=@user[:favorite_genres]%></li>
-</ul>
+		<ul>
+			<li>User's name: <%=@user[:name]%></li>
+			<li>User likes old movies?(released before 1970): <%=@user[:likes_old_movies]%></li>
+			<li>User's favorite genres are : <%=@user[:favorite_genres]%></li>
+		</ul>
 
-<p>If you wish to see Henry's top ten Fractal choosen movies then click here!</p>
-<%= link_to "Show Top Ten Movies", greetings_show_path, method: :put, class:"btn btn-success" %><br/><br/>
+		<p>If you wish to see Henry's top ten movies then click here!</p>
+		<%= link_to "Show Top Ten Movies", greetings_show_path, method: :put, class:"btn btn-success" %><br/><br/>
 
+	<h4>Otherwise tell us a little bit about yourself, and we'll show you your custom top ten</h4><br/>
 
-<h4>Otherwise tell us a little bit about yourself, and we'll show you your custom top ten</h4>
+	<%= form_tag('/greetings/show', method: :put) do %>
+		<%= label_tag 'user[name]', 'Name:' %>
+	    <%= text_field_tag 'user[name]', @user[:name] %><br>
 
-<%= form_tag('/greetings/show', method: :put) do %>
-	<%= label_tag 'user[name]', 'Name:' %>
-    <%= text_field_tag 'user[name]', @user[:name] %><br>
+	<p>Like Old Movies(released before 1970)?</p>
+	<div class="btn-group" data-toggle="buttons">
+	  <label class="btn btn-primary">
+	    <input type="radio" name="user[likes_old_movies]" value="true" id="true" checked> Yes!
+	  </label>
+	  <label class="btn btn-primary">
+	    <input type="radio" name="user[likes_old_movies]" value="false" id="false" > Nope!
+	  </label>
+	</div>
 
-<p>Like Old Movies(released before 1970)?</p>
-<div class="btn-group" data-toggle="buttons">
-  <label class="btn btn-primary">
-    <input type="radio" name="user[likes_old_movies]" value="true" id="true" checked> Yes!
-  </label>
-  <label class="btn btn-primary">
-    <input type="radio" name="user[likes_old_movies]" value="false" id="false" > Nope!
-  </label>
+	<p>Favorite genres:</p>
+	<div class="btn-group" data-toggle="buttons">
+		<%@genres.each do |genre|%>
+			<label class="btn btn-primary">
+				<input type="checkbox" name="user[genres][]" id="<%=genre%>" value="<%=genre%>"><%=genre%></input>
+			</label>
+		<%end%>
+	</div><br/>
+	<%= submit_tag 'submit', class:"btn btn-success"%>
+	<% end %>
+
 </div>
-
-<p>Favorite genres:</p>
-<div class="btn-group" data-toggle="buttons">
-	<%@genres.each do |genre|%>
-		<label class="btn btn-primary">
-			<input type="checkbox" name="user[genres][]" id="<%=genre%>" value="<%=genre%>"><%=genre%></input>
-		</label>
-	 <%end%>
- </div><br/>
- <%= submit_tag 'submit', class:"btn btn-success"%>
- <% end %>
 
